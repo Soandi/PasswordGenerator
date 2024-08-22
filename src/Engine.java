@@ -35,7 +35,14 @@ public class Engine{
     }
 
    static void saveToFile() {
-        String pathme = "src/mypasswords.txt";
+       String pathme="";
+        if(mainWindow.getLinkPass() == "" || mainWindow.getLinkPass() == null) {
+            pathme = mainWindow.getLinkPass();
+            System.out.println("Стандартная ссылка");
+        }else{
+            pathme = mainWindow.getLinkPass();
+            System.out.println("Личная ссылка");
+        }
         File newFile = new File(pathme);
         Path path = Paths.get(pathme);
         String line;
