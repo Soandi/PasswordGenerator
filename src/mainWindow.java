@@ -178,14 +178,28 @@ public void toSettings(String path){
                 pathSav.setMargin(new Insets(0,10,0,10));
                 pathSav.setText(linkToPass);
 
+                JFileChooser vibratFolder = new JFileChooser();
+                vibratFolder.setAcceptAllFileFilterUsed(false);
+                vibratFolder.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+                JButton chooseFolder = new JButton("Выбрать папку");
+                chooseFolder.setBounds(pathSav.getX(),pathSav.getY()+pathSav.getHeight(),150,30);
+                chooseFolder.setFocusPainted(false);
+                chooseFolder.addActionListener(e -> {
+                    vibratFolder.showOpenDialog(null);
+                    pathSav.setText(vibratFolder.getSelectedFile().toString());
+                });
+
                 JButton saveNewPathHere = new JButton("Сохранить");
                 saveNewPathHere.setBounds(pathSav.getX()+(pathSav.getWidth()/2),pathSav.getY()+pathSav.getHeight(),150,30);
+                saveNewPathHere.setFocusPainted(false);
                 saveNewPathHere.addActionListener(e -> {
                     toSettings(pathSav.getText());
                     dopWin.dispose();
                     JOptionPane.showMessageDialog(mainWindow.this,"Успешно сохранено!","Сохранение",JOptionPane.INFORMATION_MESSAGE);
                 });
 
+                dopWin.add(chooseFolder);
                 dopWin.add(saveNewPathHere);
                 dopWin.add(textForPathSav);
                 dopWin.add(pathSav);
