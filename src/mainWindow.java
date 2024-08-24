@@ -186,8 +186,12 @@ public void toSettings(String path){
                 chooseFolder.setBounds(pathSav.getX(),pathSav.getY()+pathSav.getHeight(),150,30);
                 chooseFolder.setFocusPainted(false);
                 chooseFolder.addActionListener(e -> {
-                    vibratFolder.showOpenDialog(null);
-                    pathSav.setText(vibratFolder.getSelectedFile().toString());
+                    try {
+                        vibratFolder.showOpenDialog(null);
+                        pathSav.setText(vibratFolder.getSelectedFile().toString());
+                    }catch(Exception ev){
+                        System.out.println("Файл не выбран");
+                    }
                 });
 
                 JButton saveNewPathHere = new JButton("Сохранить");
